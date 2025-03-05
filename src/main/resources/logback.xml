@@ -6,28 +6,13 @@
     <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive"/>
     <timestamp key="timestamp-by-second" datePattern="yyyyMMdd'T'HHmmss"/>
 
-    <property scope="context" name="springAppName" value="transactions"/>
+    <property scope="context" name="springAppName" value="transaction"/>
     <property name="LOG_FILE" value="${HOSTNAME}"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSXXX} %-5p [%t] -- [%X{TRANSACTION_ID}] %logger{36}:%line [%-5level] %m%n
             </pattern>
         </layout>
-    </appender>
-
-    <appender name="IBHEDR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${LOG_FILE}.csv.log</file>
-        <!-- rollover daily -->
-        <rollingPolicy
-                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH_EDR}/${LOG_FILE}_%d{yyyyMMddHH}.csv
-            </fileNamePattern>
-        </rollingPolicy>
-
-        <encoder>
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSSXXX} %-5p [%t] -- [%X{TRANSACTION_ID}] %logger{36}:%line [%-5level] %m%n
-            </pattern>
-        </encoder>
     </appender>
 
     <appender name="SIZE_AND_TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -48,33 +33,12 @@
         </encoder>
     </appender>
 
-    <appender name="SIZE_AND_TIME_BASED_JSON_LOGS" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/${LOG_FILE}.json</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- rollover hourly -->
-            <fileNamePattern>${LOG_PATH}/${LOG_FILE}.json.%d{yyyy-MM-dd_HH}.%i.gz</fileNamePattern>
-            <!-- each file should be at most 2048MB, keep 5 days worth of history, but at most 120GB -->
-            <maxFileSize>2048MB</maxFileSize>
-            <maxHistory>120</maxHistory>
-            <totalSizeCap>120GB</totalSizeCap>
-        </rollingPolicy>
-        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-            <timestampPattern>yyyy-MM-dd'T'HH:mm:ss</timestampPattern>
-            <fieldNames>
-                <version>[ignore]</version>
-                <levelValue>[ignore]</levelValue>
-            </fieldNames>
-        </encoder>
-    </appender>
-
-
     <logger name="org.hibernate" level="INFO"/>
     <logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="SIZE_AND_TIME_BASED_FILE"/>
-        <appender-ref ref="SIZE_AND_TIME_BASED_JSON_LOGS"/>
+<!--        <appender-ref ref="SIZE_AND_TIME_BASED_FILE"/>-->
     </root>
 
 </configuration>
