@@ -27,7 +27,7 @@ public class PostgresConfig {
 
     @PostConstruct
     public void postConstruct() {
-        log.info("HikariDataSource Config : {}", this);
+        log.info("Hikari Configurations Initialized");
     }
 
 }

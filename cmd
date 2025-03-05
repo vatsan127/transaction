@@ -21,4 +21,4 @@ docker run --name postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=dev --ne
 
 docker exec -it postgres psql -U postgres -d dev
 
-docker run --name transaction-test-run  -e DB_HOST=postgres --network database transactions
+docker run --name transaction -e DB_HOST=postgres --network database transaction

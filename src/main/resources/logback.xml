@@ -2,8 +2,6 @@
 <configuration scan="true" scanPeriod="30 seconds">
 
     <property name="LOG_PATH" value="logs"/>
-    <property name="LOG_PATH_EDR" value="${LOG_PATH}/edrs"/>
-    <property name="LOG_ARCHIVE" value="${LOG_PATH}/archive"/>
     <timestamp key="timestamp-by-second" datePattern="yyyyMMdd'T'HHmmss"/>
 
     <property scope="context" name="springAppName" value="transaction"/>
