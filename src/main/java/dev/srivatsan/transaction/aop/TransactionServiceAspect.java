@@ -1,6 +1,7 @@
 package dev.srivatsan.transaction.aop;
 
 import dev.srivatsan.transaction.config.AppConfig;
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -52,4 +53,10 @@ public class TransactionServiceAspect {
             log.info(message.toString());
         }
     }
+
+    @PostConstruct
+    public void postConstruct(){
+        log.info("Spring AOP is initialized.");
+    }
+
 }

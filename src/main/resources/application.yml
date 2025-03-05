@@ -29,6 +29,7 @@ spring:
       username: ${DB_USERNAME:postgres}
       password: ${DB_PASSWORD:password}
       driver-class-name: org.postgresql.Driver
+      auto-commit: false
       maximum-pool-size: 10
       minimum-idle: 10
       pool-name: postgres-con
