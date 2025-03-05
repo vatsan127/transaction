@@ -1,1 +1,37 @@
-spring.application.name=transaction
+server:
+  port: 8080
+  servlet.context-path: /${spring.application.name}/v1
+
+management.endpoints.web.exposure.include: prometheus
+
+spring:
+  application:
+    name: transaction
+    version: 1.0.0
+  profiles:
+    active: postgres
+  banner.location: banner.txt
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  sql.init.mode: never
+  output.ansi.enabled: always
+
+---
+# Postgres properties
+spring:
+  config.activate.on-profile: postgres
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgresql://${DB_HOST:localhost}:5432/${DB_DATABASE:dev}
+      username: ${DB_USERNAME:postgres}
+      password: ${DB_PASSWORD:password}
+      driver-class-name: org.postgresql.Driver
+      maximum-pool-size: 10
+      minimum-idle: 10
+      pool-name: postgres-con
+
+---
+# Application properties
+transaction.debugModeEnabled: false
