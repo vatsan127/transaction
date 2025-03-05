@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "Stopping Running Transaction Containers: $(docker stop transaction)"
-echo "Deleting Existing Transaction Containers: $(docker rm transaction)"
+echo "Stopping Running Transaction Container: $(docker stop transaction)"
+echo "Deleting Existing Transaction Container: $(docker rm transaction)"
 
 mvn clean install -DskipTests
 mkdir -p target/dependency
@@ -13,4 +13,4 @@ echo "Tagging Old Binary with: $TIMESTAMP"
 docker tag transaction:latest transaction:$TIMESTAMP
 docker build -t transaction:latest .
 
-docker run --name transaction -e DB_HOST=postgres --network database -d transaction
+docker run --name transaction -p 8080:8080 -e DB_HOST=postgres --network database -d transaction
