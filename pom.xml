@@ -48,15 +48,6 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>net.logstash.logback</groupId>
-			<artifactId>logstash-logback-encoder</artifactId>
-			<version>7.2</version>
-		</dependency>
 
 		<!--JSON-->
 		<dependency>
@@ -113,7 +104,7 @@
 		</dependency>
 
 		<!-- Avro and Schema Registry -->
-		<dependency>
+		<!--<dependency>
 			<groupId>org.apache.avro</groupId>
 			<artifactId>avro</artifactId>
 			<version>${avro.version}</version>
@@ -127,7 +118,7 @@
 			<groupId>io.confluent</groupId>
 			<artifactId>kafka-schema-registry-client</artifactId>
 			<version>${confluent.version}</version>
-		</dependency>
+		</dependency>-->
 
 	</dependencies>
 	<modelVersion>4.0.0</modelVersion>
@@ -171,7 +162,8 @@
 	<build>
 		<plugins>
 
-			<plugin>
+			<!-- Avro -->
+			<!--<plugin>
 				<groupId>org.apache.avro</groupId>
 				<artifactId>avro-maven-plugin</artifactId>
 				<version>${avro.version}</version>
@@ -192,7 +184,7 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

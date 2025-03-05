@@ -33,12 +33,18 @@
         </encoder>
     </appender>
 
+    <logger name="ch.qos.logback.classic.LoggerContext" level="OFF"/>
+    <logger name="ch.qos.logback.classic.util.ContextInitializer" level="OFF"/>
+    <logger name="ch.qos.logback.classic.joran.JoranConfigurator" level="OFF"/>
+    <logger name="ch.qos.logback.core.ConsoleAppender" level="OFF"/>
+    <logger name="ch.qos.logback.core.rolling.RollingFileAppender" level="OFF"/>
+
     <logger name="org.hibernate" level="INFO"/>
     <logger name="com.zaxxer.hikari.HikariConfig" level="DEBUG"/>
 
+
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-<!--        <appender-ref ref="SIZE_AND_TIME_BASED_FILE"/>-->
     </root>
 
 </configuration>
