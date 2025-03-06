@@ -7,6 +7,7 @@ CREATE INDEX <INDEX_NAME> ON <TABLE_NAME>(COLUMN_NAME);
 \c change db
 \d show tables
 \q exit psql
+\dt <schema-name>.* -- get all tables from a schema
 
 psql -h localhost -p 5432 -U postgres -d dev
 psql -U postgres -d dev
@@ -28,7 +29,6 @@ docker run --name prometheus -d --network database -p 9090:9090 -v /home/steve/G
 ## Curl
 curl localhost:8080/transaction/v1/actuator/prometheus
 
-docker exec -it postgres psql -U postgres -d dev
 
 ## Employees Sample data setup
 CREATE DATABASE employees;
@@ -40,4 +40,18 @@ pg_restore -d postgresql://postgres:postgres@localhost/employees -Fc employees.s
 
 psql postgresql://[user]:[password]@[neon_hostname]/employees
 psql postgresql://postgres:postgres@localhost/employees
+
+-- get all table details present in the schema
+SELECT * FROM information_schema.tables
+WHERE table_schema = 'employees' AND table_type = 'BASE TABLE';
+
+SELECT * FROM pg_catalog.pg_tables WHERE schemaname = 'employees';
+
+select * from employees.employee e ;
+select * from employees.department d  ;
+select * from employees.department_employee de ;
+select * from employees.department_manager dm ;
+select * from employees.salary s ;
+select * from employees.title t ;
+
 
