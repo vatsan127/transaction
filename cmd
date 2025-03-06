@@ -1,6 +1,6 @@
-CREATE INDEX <INDEX_NAME> ON <TABLE_NAME>(COLUMN_NAME);
-
 ## Postgres
+
+CREATE INDEX <INDEX_NAME> ON <TABLE_NAME>(COLUMN_NAME);
 
 -- psql cmd
 \l show db
@@ -11,7 +11,6 @@ CREATE INDEX <INDEX_NAME> ON <TABLE_NAME>(COLUMN_NAME);
 psql -h localhost -p 5432 -U postgres -d dev
 psql -U postgres -d dev
 
-
 ## Docker
 docker run --name prometheus -d --network database -p 9090:9090 -v /home/steve/Git/transaction/src/main/resources/prometheus.yml:/opt/bitnami/prometheus/conf/prometheus.yml bitnami/prometheus:latest
 
@@ -19,6 +18,19 @@ docker run --name postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=dev --ne
 
 docker exec -it postgres psql -U postgres -d dev
 
+docker cp employees.sql.gz postgres:home
+
+docker images | grep 2025 | awk '{print $3}'
+
+docker run --name prometheus -d --network database -p 9090:9090 -v /home/steve/Git/transaction/src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus:latest --config.file=/etc/prometheus/prometheus.yml
+
+
+## Curl
+curl localhost:8080/transaction/v1/actuator/prometheus
+
+docker exec -it postgres psql -U postgres -d dev
+
+## Employees Sample data setup
 CREATE DATABASE employees;
 \c employees
 CREATE SCHEMA employees;
@@ -29,5 +41,3 @@ pg_restore -d postgresql://postgres:postgres@localhost/employees -Fc employees.s
 psql postgresql://[user]:[password]@[neon_hostname]/employees
 psql postgresql://postgres:postgres@localhost/employees
 
-## Curl
-curl localhost:8080/transaction/v1/actuator/prometheus
