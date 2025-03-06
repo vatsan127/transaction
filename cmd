@@ -19,6 +19,15 @@ docker run --name postgres -e POSTGRES_PASSWORD=password -e POSTGRES_DB=dev --ne
 
 docker exec -it postgres psql -U postgres -d dev
 
+CREATE DATABASE employees;
+\c employees
+CREATE SCHEMA employees;
+
+pg_restore -d postgresql://[user]:[password]@[hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
+pg_restore -d postgresql://postgres:postgres@localhost/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
+
+psql postgresql://[user]:[password]@[neon_hostname]/employees
+psql postgresql://postgres:postgres@localhost/employees
 
 ## Curl
 curl localhost:8080/transaction/v1/actuator/prometheus
